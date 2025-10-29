@@ -1,0 +1,78 @@
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .mermaid {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="mermaid">
+    graph TD
+      A[Physical Objects] --> B{Object Type}
+      
+      B -->|Documents/Flat| C[Flatbed Scanner<br/>Cruse/Zeutschel]
+      B -->|Art/Fragile| D[Camera Setup<br/>Phase One/Sony A7R<br/>+ Copy Stand]
+      
+      C --> F[Raw Image Files<br/>TIFF/RAW]
+      D --> F
+      
+      F --> H[Quality Control<br/>& Color Calibration]
+      
+      H --> I[Processing Station<br/>Capture One/Photoshop]
+      
+      I --> J[Generate Derivatives]
+      
+      J --> K[Master Files<br/>High-res TIFF/PSD]
+      J --> L[Access Copies<br/>JPEG/PNG]
+      J --> M[Thumbnails<br/>Small JPEG]
+      J --> N[PDF Generation<br/>if applicable]
+      
+      K --> O[File Storage Servers<br/>S3/Cloud Storage/NAS]
+      L --> O
+      M --> O
+      N --> O
+      
+      O --> P[OCR Processing<br/>if text documents]
+      
+      P --> Q[Extract Text<br/>& Metadata]
+      
+      Q --> R[Firebase Firestore]
+      
+      K --> S[Generate Metadata<br/>Filename, Size, Format,<br/>Resolution, Color Space]
+      L --> S
+      M --> S
+      N --> S
+      
+      S --> R
+      
+      R --> T[(Firebase Database)]
+      T --> |Stores| U[- Object ID<br/>- Title/Description<br/>- Extracted Text<br/>- File URLs<br/>- Dimensions<br/>- Creator Info<br/>- Date Created<br/>- Tags/Categories<br/>- Access Rights]
+      
+      O --> V[CDN Distribution<br/>CloudFlare/CloudFront]
+      
+      V --> W[End Users/<br/>Web Application]
+      T --> W
+      
+      style A fill:#e1f5ff
+      style T fill:#ffd700
+      style O fill:#90EE90
+      style W fill:#ffb6c1
+      style C fill:#f0f0f0
+      style D fill:#f0f0f0
+  </div>
+  
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+</body>
+</html>
